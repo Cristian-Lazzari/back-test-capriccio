@@ -76,7 +76,7 @@ class ProjectController extends Controller
     public function create(Request $request)
     {
         $categories             = Category::all();
-        $tags                   = Tag::orderBy('name')->get();
+        $tags                   = Tag::whereRaw('CHAR_LENGTH(name) <= 50')->orderBy('name')->get();
         $tagDescription         = Tag::whereRaw('CHAR_LENGTH(name) >= 50')->orderBy('name')->get();
 
         return view('admin.projects.create', compact('categories', 'tags', 'tagDescription'));
