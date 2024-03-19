@@ -10,5 +10,5 @@ class Day extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $fillable = ['day', 'm', 'y'];
+    protected $fillable = ['day', 'day_w', 'm', 'y'];
 }

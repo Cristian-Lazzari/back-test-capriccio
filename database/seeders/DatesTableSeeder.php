@@ -47,16 +47,17 @@ class DatesTableSeeder extends Seeder
             $daysInMonth = $currentDate->format('t'); //n giorni nel mese
             Month::create([
                 'month' => $currentDate->format('F'),
-                'n' => $currentDate->format('n'),
-                'y' => $currentDate->format('Y'),
+                'n'     => $currentDate->format('n'),
+                'y'     => $currentDate->format('Y'),
             ]);
             for ($day = $currentDate->format('d'); $day <= $daysInMonth; $day++) {
                 $currentDayOfWeek = $currentDate->format('N');
 
                 Day::create([
-                    'day' => $currentDate->format('d'),
-                    'm' => $currentDate->format('n'),
-                    'y' => $currentDate->format('Y'),
+                    'day'   => $currentDate->format('d'),
+                    'day_w' => $currentDayOfWeek,
+                    'm'     => $currentDate->format('n'),
+                    'y'     => $currentDate->format('Y'),
                 ]);
 
                 foreach ($times[$currentDayOfWeek - 1] as $time) {

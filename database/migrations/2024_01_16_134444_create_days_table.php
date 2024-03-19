@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('days', function (Blueprint $table) {
             $table->id();
             $table->smallInteger('day');
+            $table->tinyInteger('day_w');
             $table->smallInteger('m');
             $table->smallInteger('y');
         });
