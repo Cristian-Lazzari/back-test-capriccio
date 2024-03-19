@@ -368,12 +368,11 @@ td {
             font-weight: bolder;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.22);
         }
-        button.off{
+        button.off {
             color: red !important;
             text-shadow: 0 0 5px rgba(228, 228, 228, 0.95) !important;
         }
     }
-    
 }
 
 .myproj-c {
@@ -702,16 +701,16 @@ table {
 .pointer:hover {
     cursor: pointer;
 }
-.mycDash{
+.mycDash {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    section{
+    section {
         display: flex;
         gap: 10px;
         width: 100%;
     }
-    a{
+    a {
         text-decoration: none;
         color: rgb(255, 255, 255);
         flex: 8 1 auto;
@@ -722,79 +721,95 @@ table {
         border-radius: 20px;
         gap: 4px;
         box-shadow: 3px 3px 9px rgba(0, 0, 0, 0.4);
-        transition: all .3s ease-in-out;
+        transition: all 0.3s ease-in-out;
         font-size: clamp(20px, 2.7vw, 26px);
-        text-transform: uppercase; 
+        text-transform: uppercase;
         font-weight: bold;
     }
 
-    .small{
-        
-        width:clamp(70px, 10%, 150px) !important;
+    .small {
+        width: clamp(70px, 10%, 150px) !important;
         flex-grow: 0;
         //width: auto !important;
         aspect-ratio: 1;
     }
 }
 @media (min-width: 950px) {
-    .mycDash{
-        a:hover{
+    .mycDash {
+        a:hover {
             font-size: 29px;
-            transition: all .3s ease-in-out;
+            transition: all 0.3s ease-in-out;
             opacity: 0.7;
         }
     }
 }
-.s1a{
-    
+.s1a {
     background-color: rgb(130, 125, 149, 0.788) !important;
 }
-.s1b{
+.s1b {
     background-color: rgb(3, 46, 187, 0.788) !important;
-    
 }
-.s2a{
+.s2a {
     background-color: rgb(52, 53, 87, 0.788) !important;
-    
 }
-.s2b{
-    
+.s2b {
     background-color: rgb(0, 32, 134, 0.788) !important;
 }
-.s2c{
+.s2c {
     background-color: rgb(0, 22, 96, 0.788) !important;
-    
-    
 }
-.s3a{
-    
+.s3a {
     background-color: rgba(82, 0, 158, 0.788) !important;
 }
-.s3b{
-    
+.s3b {
     background-color: rgba(73, 0, 152, 0.788) !important;
 }
-.s4a{
+.s4a {
     background-color: rgba(19, 148, 114, 0.788) !important;
-    
 }
-.s4b{
-    
+.s4b {
     background-color: rgba(13, 115, 102, 0.788) !important;
 }
-.s5a{
-    
+.s5a {
     background-color: rgba(4, 134, 139, 0.788) !important;
 }
-.s5b{
-    
+.s5b {
     background-color: rgba(16, 95, 112, 0.788) !important;
 }
-.mybtdb{
+.mybtdb {
     font-size: 25px;
     padding: 5px 20px;
     border-radius: 11px;
 }
-.c-white{
+.c-white {
     color: white !important;
+}
+
+.days_w {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    .day_w {
+        color: white;
+        font-size: clamp(10px, 2vw, 20px);
+        font-weight: lighter;
+        padding: 1rem 0.2rem;
+        border: solid 1px white;
+        text-align: center;
+        background-color: rgb(48, 6, 6);
+    }
+}
+
+.day_grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    .day {
+        // color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: clamp(12px, 2vw, 20px);
+        padding: 1rem 0.2rem;
+        border: solid 1px white;
+    }
 }
