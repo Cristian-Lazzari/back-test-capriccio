@@ -43,86 +43,28 @@ class DateController extends Controller
         
         return redirect()->back();
     }
-    public function upmaxres($date_id)
+   
+
+
+    public function updateMax(Request $request)
     {
-        $date = Date::find($date_id);
-        $date->max_res++;
-        $date->save();
-
-        return redirect()->back();
-    }
-
-    public function downmaxres($date_id)
-    {
-        $date = Date::find($date_id);
-        if ($date->max_res > 0) {
-
-            $date->max_res--;
-            $date->save();
+        $v = $request->input('v');
+        $max = $request->input('max');
+        $date = Date::find($request->input('id'));
+    //  dd($max);
+        if($v == 1){
+            $date->max_res = $max;
+        }else if($v == 2){
+            $date->max_pz_t = $max;
+        }else if($v == 3){
+            $date->max_pz_q = $max;
+        }else if($v == 4){
+            $date->max_domicilio = $max;
         }
-
-        return redirect()->back();
-    }
-    public function upmaxpz($date_id)
-    {
-        $date = Date::find($date_id);
-        $date->max_pz_q++;
-        $date->save();
-
+        $date->save();   
         return redirect()->back();
     }
 
-    public function downmaxpz($date_id)
-    {
-        $date = Date::find($date_id);
-        if ($date->max_pz_q > 0) {
-
-            $date->max_pz_q--;
-            $date->save();
-        }
-
-        return redirect()->back();
-    }
-    public function upmaxpzt($date_id)
-    {
-        $date = Date::find($date_id);
-        $date->max_pz_t++;
-        $date->save();
-
-        return redirect()->back();
-    }
-
-    public function downmaxpzt($date_id)
-    {
-        $date = Date::find($date_id);
-        if ($date->max_pz_t > 0) {
-
-            $date->max_pz_t--;
-            $date->save();
-        }
-
-        return redirect()->back();
-    }
-    public function upmaxpzd($date_id)
-    {
-        $date = Date::find($date_id);
-        $date->max_domicilio++;
-        $date->save();
-
-        return redirect()->back();
-    }
-
-    public function downmaxpzd($date_id)
-    {
-        $date = Date::find($date_id);
-        if ($date->max_domicilio > 0) {
-
-            $date->max_pz_t--;
-            $date->save();
-        }
-
-        return redirect()->back();
-    }
 
     private $validations = [
         'max_domicilio'         => 'required|integer',
