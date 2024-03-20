@@ -21,7 +21,7 @@ class DayController extends Controller
         $month_id = intVal($request->month_id);
      
         
-        $days = Day::where('m', $month)->where('y', $year)->paginate(100);
+        $days = Day::where('m', $month)->where('y', $year)->get();
 
         return view('admin.days.index', compact('days', 'month_id'));
     }

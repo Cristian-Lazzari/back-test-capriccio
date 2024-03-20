@@ -29,76 +29,67 @@
                             <span class="day_w">{{$days_name[$date->day_w]}}</span>
                             <span>{{$date->day}}/{{$date->month}}/{{$date->year}}</span>
                         </div>
-                        <div class="res">
-                            <h3>Pezzi al taglio Prenotati</h3>
-                            <div class="n_res">{{$date->reserved_pz_q}}</div>    
+                        <div class="res-c">
+                            <div class="res">
+                                <h3>Pezzi al taglio Prenotati</h3>
+                                <div class="n_res">{{$date->reserved_pz_q}}</div>    
+                            </div>
+                            <div class="res">
+                                <h3>Pizze al piatto Prenotate</h3>
+                                <div class="n_res">{{$date->reserved_pz_t}}</div>    
+                            </div>
+                            <div class="res">
+                                <h3>Posti Prenotati</h3>
+                                <div class="n_res">{{$date->reserved}}</div>
+                            </div>
+                            <div class="res">
+                                <h3>Ordini a domicilio</h3>
+                                <div class="n_res">{{$date->reserved_domicilio}}</div>
+                            </div>
                         </div>
-                        <div class="res">
-                            <h3>Pizze al piatto Prenotate</h3>
-                            <div class="n_res">{{$date->reserved_pz_t}}</div>    
-                        </div>
-                        <div class="res">
-                            <h3>Posti Prenotati</h3>
-                            <div class="n_res">{{$date->reserved}}</div>
-                        </div>
-                        <div class="res">
-                            <h3>Ordini a domicilio</h3>
-                            <div class="n_res">{{$date->reserved_domicilio}}</div>
-                        </div>
+                        
                     </div>
                     <div class="right-c">
                         <div class="max">
                             <h3>Max Posti</h3>
-                            <form action="{{ route('admin.dates.upmaxres', $date->id) }}" method="post">
+                            <form action="{{ route('admin.dates.updateMax') }}" method="post">
                                 @csrf
-                                <button  class="btn btn-dark">+</button>
-                            </form>
-                            <span>{{$date->max_res}}</span>
-
-                            <form action="{{ route('admin.dates.downmaxres', $date->id) }}" method="post">
-                                @csrf
-                                <button  class="btn btn-dark">-</button>
+                                <input type="hidden" name="id" value="{{$date->id}}">
+                                <input type="hidden" name="v" value="1">
+                                <input type="number" class="form-control m-1 w-50" name="max" value="{{$date->max_res}}">
+                                <button  class="btn btn-dark">Modifica</button>
                             </form>
                         </div>
                         <div class="max">
                             <h3>Max Pizze al piatto</h3>
-                            <form action="{{ route('admin.dates.upmaxpz', $date->id) }}" method="post">
+                            <form action="{{ route('admin.dates.updateMax') }}" method="post">
                                 @csrf
-                                <button  class="btn btn-dark">+</button>
+                                <input type="hidden" name="v" value="2">
+                                <input type="number" class="form-control m-1 w-50" name="max" value="{{$date->max_pz_t}}">
+                                <input type="hidden" name="id" value="{{$date->id}}">
+                                <button  class="btn btn-dark">Modifica</button>
                             </form>
-                            <span>{{$date->max_pz_t}}</span>
-
-                            <form action="{{ route('admin.dates.downmaxpz', $date->id) }}" method="post">
-                                @csrf
-                                <button  class="btn btn-dark">-</button>
-                            </form>
-
+                            
                         </div>
                         <div class="max">
                             <h3>Max Pezzi al taglio</h3>
-                            <form action="{{ route('admin.dates.upmaxpz', $date->id) }}" method="post">
+                            <form action="{{ route('admin.dates.updateMax') }}" method="post">
                                 @csrf
-                                <button  class="btn btn-dark">+</button>
+                                <input type="hidden" name="v" value="3">
+                                <input type="number" class="form-control m-1 w-50" name="max" value="{{$date->max_pz_q}}">
+                                <input type="hidden" name="id" value="{{$date->id}}">
+                                <button  class="btn btn-dark">Modifica</button>
                             </form>
-                            <span>{{$date->max_pz_q}}</span>
-
-                            <form action="{{ route('admin.dates.downmaxpz', $date->id) }}" method="post">
-                                @csrf
-                                <button  class="btn btn-dark">-</button>
-                            </form>
-
+                            
                         </div>
                         <div class="max">
                             <h3>Max ordini dom.</h3>
-                            <form action="{{ route('admin.dates.upmaxpz', $date->id) }}" method="post">
+                            <form action="{{ route('admin.dates.updateMax') }}" method="post">
                                 @csrf
-                                <button  class="btn btn-dark">+</button>
-                            </form>
-                            <span>{{$date->max_pz_q}}</span>
-
-                            <form action="{{ route('admin.dates.downmaxpz', $date->id) }}" method="post">
-                                @csrf
-                                <button  class="btn btn-dark">-</button>
+                                <input type="hidden" name="id" value="{{$date->id}}">
+                                <input type="hidden" name="v" value="4">
+                                <input type="number" class="form-control m-1 w-50" name="max" value="{{$date->max_domicilio}}">
+                                <button  class="btn btn-dark">Modifica</button>
                             </form>
 
                         </div>

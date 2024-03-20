@@ -285,6 +285,16 @@ td {
         display: flex;
         text-align: center;
         width: 50%;
+        .res-c{
+            display: flex;
+            flex-direction: column;
+            flex-grow: 2;
+            
+        }
+        .res{
+            flex-direction: row !important;
+            flex-grow: 0 !important;
+        }
 
         .data,
         .res {
@@ -296,7 +306,17 @@ td {
             align-items: center;
             font-size: 16px;
             padding: 1rem;
-
+            h3 {
+                font-size: 18px;
+            }
+            .n_res {
+                
+               
+                align-items: center;
+                justify-content: center;
+               
+                font-size: 40px;
+            }
             h2 {
                 font-size: 30px;
             }
@@ -307,39 +327,26 @@ td {
                 text-transform: capitalize;
             }
         }
-        .res {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            h3 {
-                font-size: 18px;
-            }
-            .n_res {
-                display: flex;
-                flex-direction: column;
-                height: 100%;
-                align-items: center;
-                justify-content: center;
-                margin-top: -15px;
-                font-size: 40px;
-            }
-        }
+        
+      
     }
     .right-c {
         display: flex;
         width: 50%;
-
+        flex-direction: column;
         .max {
             flex-grow: 1;
 
             height: 100%;
             padding: 15px;
             display: flex;
-            flex-direction: column;
+            //flex-direction: column;
             align-items: center;
             justify-content: space-between;
-
+            form{
+                display: flex;
+                gap: 1rem;
+            }
             h3 {
                 font-size: 17px;
             }
@@ -789,6 +796,7 @@ table {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
 
+    gap: 1%;
     .day_w {
         color: white;
         font-size: clamp(10px, 2vw, 20px);
@@ -796,20 +804,50 @@ table {
         padding: 1rem 0.2rem;
         border: solid 1px white;
         text-align: center;
-        background-color: rgb(48, 6, 6);
+        
+        border-radius: 10px;
+        background-color: rgba(12, 6, 79, 0.601);
     }
 }
 
 .day_grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    margin-top:40px;
+    gap:1%;
+
     .day {
-        // color: white;
+        margin: 4% auto;
+        width: 70%;
+        border-radius: 100px;
+        background-color: rgba(0, 26, 195, 0.318);
+        color: white !important;
+        text-decoration: none;
         display: flex;
+        aspect-ratio: 1;
         justify-content: center;
         align-items: center;
         font-size: clamp(12px, 2vw, 20px);
-        padding: 1rem 0.2rem;
+       
         border: solid 1px white;
     }
+}
+.date-top{
+   width: 100%;
+   display: flex;
+   flex-wrap: wrap;
+   gap: 20%;
+   text-align: center;
+   justify-content: center;
+   h3{
+    width: 100%;
+    font-size: clamp(25px, 3vw, 30px);
+   }
+   .mybtndate{
+    width: clamp(110px, 20%, 350px) ;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: .6em 1em;
+    border-radius: 2em;
+   }
 }
