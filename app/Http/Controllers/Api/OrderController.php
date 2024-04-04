@@ -139,7 +139,7 @@ class OrderController extends Controller
             Mail::to($data['email'])->send($mail);
 
             $mailAdmin = new confermaOrdineAdmin($newOrder, $arrvar2);
-            Mail::to('test@dashboardristorante.it')->send($mailAdmin);
+            Mail::to('info@pizzeria-capricciodileo.it')->send($mailAdmin);
 
             // ritornare un valore di successo al frontend
             return response()->json([
