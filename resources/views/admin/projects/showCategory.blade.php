@@ -54,12 +54,12 @@
         </a>   
         </div>
         <div>
-            <a class="btn my-btn btn-success my-1 flex-grow-1" href="{{ route('admin.projects.create') }}">
-                Nuovo
-            </a>
-            <a class="btn my-btn btn-danger my-1 flex-grow-1" href="{{ route('admin.projects.trashed') }}">
-                Cestino
-            </a>
+            <a class="btn my-btn btn-success m-1 w-auto" href="{{ route('admin.projects.create') }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+              </svg></a>
+            <a class="btn my-btn btn-danger m-1 w-auto" href="{{ route('admin.projects.trashed') }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+              </svg></a>
         </div>
 
        
@@ -133,8 +133,11 @@
             >
                 <div class="fs-4 fw-bold">{{ $project->name }}</div>
                 <div class="fs-6 text-secondary">{{ $project->category->name }}</div>
-                {{-- <img class="my-image" src="https://db.dashboardristorante.it/public/images/or.png" alt="{{ $project->name }}"> --}}
+                @if ($project->image)                
                 <img class="my-image" src="{{ asset('public/storage/' . $project->image) }}" alt="img di {{ $project->name }}">
+                @else
+                <img class="my-image" src="https://db.dashboardristorante.it/public/images/or.png" alt="{{ $project->name }}">
+                @endif
                 <div class="fs-6 text-primary fw-bold mb-2 pointer" data-bs-toggle="modal" data-bs-target="#modalIngrendient-{{ $project->id }}">Dettagli</div>
 
                 <div class="actions d-flex flex-wrap gap-2">
@@ -148,6 +151,7 @@
                     </a>
                     {{-- ELIMINA  --}}
                     <form action="{{ route('admin.projects.destroy', ['project' =>$project])}}" method="post">
+                        @method('delete')
                         @csrf
                         <button class="btn btn-sm btn-danger">
                             <svg style="vertical-align: sub" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
@@ -189,21 +193,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                       
                         <p>
-                            <span class="fw-semibold">Descrizione: </span>
-                            @if (count($project->tags))
-                                
-                                @if (strlen($project->tags[0]['name']) > 50)
-                                    {{ $project->tags[0]['name'] }}
-                                @else
-                                    Nessuna descrizione
+                            <span class="fw-semibold">Ingredienti descrittivi: </span>
+                            @foreach ($project->tags as $tag)
+                                @if ($tag->price == 0)
+                                    <span>{{ $tag->name }}</span>
+                                    {{ !$loop->last ? ', ' : '.' }}
                                 @endif
-                            @endif
+                            @endforeach
                         </p>
                         <p>
                             <span class="fw-semibold">Ingredienti: </span>
                             @foreach ($project->tags as $tag)
-                                @if (strlen($tag->name) < 50)
+                                @if ($tag->price)
                                     <span>{{ $tag->name }}</span>
                                 @endif
                                 {{ !$loop->last ? ', ' : '.' }}

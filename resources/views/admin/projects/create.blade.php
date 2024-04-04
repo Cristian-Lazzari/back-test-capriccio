@@ -79,7 +79,7 @@
                 @foreach($tagDescription as $description)
 
                     <input
-                        type="radio"
+                        type="checkbox"
                         class="btn-check @error ('description') is-invalid @enderror"
                         id="description-{{ $description->id }}"
                         name="description"
@@ -127,7 +127,7 @@
 
         <div class="text-center border border-black w-50 mx-auto mb-4 p-3 rounded shadow">
             <h4>Ingrediente mancante? Crealo ora!</h4>
-            <p><span class="fw-semibold">Attenzione:</span> Gli ingredienti con più di 50 caratteri saranno considerati una descrizione del prodotto</p>
+            <p><span class="fw-semibold">Attenzione:</span> Gli ingredienti con prezzo uguale a 0 saranno considerati una descrizione del prodotto</p>
             <div class="mb-3 text-center">
                 <label for="name_ing" class="form-label fw-semibold">Nome</label>
                 <input
@@ -154,6 +154,17 @@
                     @error('price_ing') {{ $message }} @enderror
                 </div>
             </div>
+            <input
+                type="checkbox"
+                class="btn-check @error ('description') is-invalid @enderror"
+                id="on-1"
+                name="newi"
+                value="1"
+                
+    
+            >
+            <label class="btn m-3 btn-outline-light" for="on-1">conferma</label>
+            <button class="btn mb-5 w-auto m-auto btn-light d-block">Salva igrediente</button>
         </div>
 
         <button class="btn mb-5 w-75 m-auto btn-light d-block">Salva</button>

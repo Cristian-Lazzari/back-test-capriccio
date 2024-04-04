@@ -75,9 +75,17 @@ class ProjectController extends Controller
 
     public function create(Request $request)
     {
-        $categories             = Category::all();
-        $tags                   = Tag::whereRaw('CHAR_LENGTH(name) <= 50')->orderBy('name')->get();
-        $tagDescription         = Tag::whereRaw('CHAR_LENGTH(name) >= 50')->orderBy('name')->get();
+        $categories     = Category::all();
+        $alltag         = Tag::all();
+        $tags = [];
+        $tagDescription = [];
+        foreach ($alltag as $tag) {
+            if($tag['price'] == 0){
+                array_push($tagDescription, $tag);
+            }else{
+                array_push($tags, $tag);
+            }
+        }
 
         return view('admin.projects.create', compact('categories', 'tags', 'tagDescription'));
     }
@@ -90,7 +98,8 @@ class ProjectController extends Controller
     {
         $tag_name = $request->name_ing;
         $tag_price = $request->price_ing;
-        if ($tag_name && $tag_price) {
+        $newi = $request->newi;
+        if (isset($newi)) {
             $request->validate($this->validations_tag);
 
             $new_ing = new Tag();
@@ -125,9 +134,9 @@ class ProjectController extends Controller
         $newProject->category_id   = $data['category_id'];
 
         $newProject->save();
-
-        array_unshift($data['tags'], $data['description']);
-        $newProject->tags()->sync($data['tags'] ?? []);
+        if(isset($data['tags'])){
+            $newProject->tags()->sync($data['tags'] ?? []);
+        }
 
         return redirect()->route('admin.projects.index', ['project']);
     }

@@ -21,6 +21,7 @@
             @error('name') {{ $message }} @enderror
         </div>
     </div>
+    <p><span class="fw-semibold">Attenzione:</span> Gli ingredienti con prezzo uguale a 0 saranno considerati una descrizione del prodotto</p>
     <div class="mb-3">
         <label for="price" class="form-label">Prezzo in centesimi</label>
         <input
