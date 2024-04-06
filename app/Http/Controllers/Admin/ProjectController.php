@@ -86,10 +86,10 @@ class ProjectController extends Controller
                 array_push($tags, $tag);
             }
         }
-
+        
         return view('admin.projects.create', compact('categories', 'tags', 'tagDescription'));
     }
-
+    
     private $validations_tag = [
         'name_ing'          => 'required|string|min:2',
         'price_ing'         => 'required',
@@ -101,62 +101,85 @@ class ProjectController extends Controller
         $newi = $request->newi;
         if (isset($newi)) {
             $request->validate($this->validations_tag);
-
+            
             $new_ing = new Tag();
             $new_ing->name = $tag_name;
-
+            
             if ($tag_name > 50) {
                 $new_ing->price = 0;
             } else {
                 $new_ing->price = $tag_price;
             }
-
+            
             $new_ing->save();
-
+            
             return redirect()->route('admin.projects.create')->with('tag_success', true);
         }
-
+        
         $request->validate($this->validations);
         $data = $request->all();
-
+        
         $newProject = new Project();
-
+        
         if (isset($data['image'])) {
             $imagePath = Storage::put('public/uploads', $data['image']);
             $newProject->image = $imagePath;
         }
-
-
+        
+        
         $newProject->name          = $data['name'];
         $newProject->price         = $data['price'];
         $newProject->counter       = 0;
         $newProject->slug          = Project::slugger($data['name']);
         $newProject->category_id   = $data['category_id'];
-
+        
         $newProject->save();
-        if(isset($data['tags'])){
-            $newProject->tags()->sync($data['tags'] ?? []);
+        
+        $tag = [];
+        if(isset($data['tags']) || isset($data['description'])){
+            if(isset($data['description'])){
+                foreach ($data['description'] as $v ) {
+                    array_push($tag, $v);
+                }
+            }
+            if(isset($data['tags'])){
+                foreach ($data['tags'] as $v) {
+                    array_push($tag, $v);
+                }
+            }
+      
+            $newProject->tags()->sync($tag ?? []);
         }
-
-        return redirect()->route('admin.projects.index', ['project']);
+        
+        return to_route('admin.projects.show', ['project' => $newProject]);
     }
-
+    
     public function show($id)
     {
         $project = Project::where('id', $id)->firstOrFail();
         return view('admin.projects.show', compact('project'));
     }
-
-
-
+    
+    
+    
     public function edit($id)
     {
+        
+        $project        = Project::where('id', $id)->firstOrFail();
+        $categories     = Category::all();
+        $alltag         = Tag::all();
+        $tags           = [];
+        $tagDescription = [];
 
-        $project = Project::where('id', $id)->firstOrFail();
+        foreach ($alltag as $tag) {
+            if($tag['price'] == 0){
+                array_push($tagDescription, $tag);
+            }else{
+                array_push($tags, $tag);
+            }
+        }
 
-        $categories = Category::all();
-        $tags       = Tag::orderBy('name')->get();
-        return view('admin.projects.edit', compact('project', 'categories', 'tags'));
+        return view('admin.projects.edit', compact('project', 'categories', 'tags', 'tagDescription'));
     }
 
 
@@ -190,8 +213,20 @@ class ProjectController extends Controller
         $project->category_id   = $data['category_id'];
         $project->update();
 
-        // associare i tag
-        $project->tags()->sync($data['tags'] ?? []);
+        $tag = [];
+        if(isset($data['tags']) || isset($data['description'])){
+            if(isset($data['description'])){
+                foreach ($data['description'] as $v ) {
+                array_push($tag, $v);
+                }
+            }
+            if(isset($data['tags'])){
+                foreach ($data['tags'] as $v) {
+                array_push($tag, $v);
+                }
+            }
+            $project->tags()->sync($tag ?? []);
+        }
 
         // ridirezionare su una rotta di tipo get
         return to_route('admin.projects.show', ['project' => $project]);

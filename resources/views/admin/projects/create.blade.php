@@ -82,7 +82,7 @@
                         type="checkbox"
                         class="btn-check @error ('description') is-invalid @enderror"
                         id="description-{{ $description->id }}"
-                        name="description"
+                        name="description[]"
                         value="{{ $description->id }}"
                         @if (old('description') == $description->id) checked @endif
             

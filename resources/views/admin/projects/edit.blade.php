@@ -70,34 +70,60 @@
     </div>
 
 
-    <div class="mb-3">
+
+    <div class="mb-5 m-auto w-75 btn-group specialradio">
+
+        <h3>Descrizione</h3>
+        <div class="mytags mb-4">
+            @foreach($tagDescription as $description)
+
+                <input
+                    type="checkbox"
+                    class="btn-check @error ('description') is-invalid @enderror"
+                    id="description-{{ $description->id }}"
+                    name="description[]"
+                    value="{{ $description->id }}"
+                    @if (in_array($description->id, old('tags', $project->tags->pluck('id')->all()))) checked @endif
+        
+                >
+                <label class="btn btn-outline-dark" for="description-{{ $description->id }}">{{ $description->name }}</label>
+
+                @error('description') 
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            
+            @endforeach
+
+        </div>
+
         <h3>Ingredienti</h3>
         <div class="mytags">
-
             @foreach($tags as $tag)
 
-                    <input
-                        type="checkbox"
-                        class="btn-check @error ('tags') is-invalid @enderror"
-                        id="tag{{ $tag->id }}"
-                        name="tags[]"
-                        value="{{ $tag->id }}"
-                        @if (in_array($tag->id, old('tags', $project->tags->pluck('id')->all()))) checked @endif
-          
-                    >
-                    <label class="btn btn-outline-dark" for="tag{{ $tag->id }}">{{ $tag->name }}</label>
+                <input
+                    type="checkbox"
+                    class="btn-check @error ('tags') is-invalid @enderror"
+                    id="tag{{ $tag->id }}"
+                    name="tags[]"
+                    value="{{ $tag->id }}"
+                    @if (in_array($tag->id, old('tags', $project->tags->pluck('id')->all()))) checked @endif
+        
+                >
+                <label class="btn btn-outline-dark shadow-sm" for="tag{{ $tag->id }}">{{ $tag->name }}</label>
 
                 @error('tags') 
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
-             
+            
             @endforeach
-        </div>
-     
 
+        </div>
     </div>
+
 
 
 
