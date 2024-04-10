@@ -21,6 +21,15 @@
             </div>
             <h3>Descrizione: <div class="">{{ $post->description }}</div> </h3>
             <h3>Instagram Link: <span class="badge rounded-pill bg-secondary">{{ $post->link }}</span> </h3>
+            <h3>TIPOLOGIA:
+                @if ($post->type == 1)
+                    
+                <span class="badge rounded-pill bg-primary">IN VIAGGIO CON LEO</span> 
+                @else
+                <span class="badge rounded-pill bg-primary">LA NOSTRA STORIA</span> 
+                    
+                @endif
+                </h3>
             <h3>Data ultima modifica: <span class="badge rounded-pill bg-warning">{{ $post->created_at }}</span> </h3>
             <h3>Data ultima modifica: <span class="badge rounded-pill bg-danger">{{ $post->updated_at }}</span> </h3>
         </div>

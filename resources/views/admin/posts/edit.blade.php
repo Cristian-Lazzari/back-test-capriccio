@@ -35,6 +35,28 @@
         </div>
     </div>
 
+    <div class="mb-3 text-center w-50 m-auto">
+        <label for="type" class="form-label fw-semibold">Tipologia</label>
+        <select
+            class="form-select @error('type_id') is-invalid @enderror"
+            id="type"
+            name="type"
+        >
+            <option
+            @if (old('type', $post->type) == 1) selected @endif
+            value="1">In viaggio con leo</option>
+            <option
+            @if (old('type', $post->type) == 2) selected @endif
+            value="2">La nostra Storia</option>
+            
+        </select>
+
+        @error('type')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
 
     <div class="input-group mb-3">
         <input type="file" class="form-control" id="image" name="image" accept="image/*">

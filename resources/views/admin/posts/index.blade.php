@@ -35,6 +35,7 @@
                     <th class="expire-mobile-s">IMMAGINE</th>
                     <th class="expire-mobile-s">DESCRIZIONE</th>
                     <th class="expire-mobile-s">INSTAGRAM LINK</th>
+                    <th class="expire-mobile-s">TIPOLOGIA</th>
  
                     <th class="expire-mobile">HASHTAG</th>
                     <th>
@@ -62,6 +63,14 @@
                         </td>
                         <td class="expire-mobile-s">{{$post->description}}</td>
                         <td class="expire-mobile-s">{{$post->link}}</td>
+                        <td class="expire-mobile-s">
+                            @if ($post->type == 1)
+                            <span class="badge rounded-pill bg-primary">IN VIAGGIO CON LEO</span> 
+                            @else
+                            <span class="badge rounded-pill bg-primary">LA NOSTRA STORIA</span> 
+                                
+                            @endif
+                        </td>
                  
                         <td class="expire-mobile">
                             @foreach ($post->hashtags as $tag)

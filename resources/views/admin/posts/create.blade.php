@@ -5,7 +5,7 @@
 <form class="px-2 py-5 s3b rounded c-white" method="POST" action="{{ route('admin.posts.store') }} " enctype="multipart/form-data" >
     @csrf
     <h2>Crea un nuovo Post</h2>
-    <div class="mb-3 nome_">
+    <div class="mb-5 nome_">
         <label for="title" class="form-label">Titolo del Post</label>
         <input
             type="text"
@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div class="mb-3 link_">
+    <div class="mb-5 link_">
         <label for="link" class="form-label">Instagram LINK</label>
         <input
             type="text"
@@ -32,8 +32,27 @@
             @error('link') {{ $message }} @enderror
         </div>
     </div>
+    <div class="mb-5">
+        <label for="type" class="form-label fw-semibold">Tipologia</label>
+        <select
+            class="form-select @error('type_id') is-invalid @enderror"
+            id="type"
+            name="type"
+        >
+            <option value="1">Scegli un opzione</option>
+            <option value="1">In viaggio con leo</option>
+            <option value="2">La nostra Storia</option>
+            
+        </select>
 
-    <div class="mb-3 descrizione_">
+        @error('type')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror
+    </div>
+
+    <div class="mb-5 descrizione_">
         <label for="description" class="form-label">Descrizione</label>
         <textarea
             type="text"
@@ -47,7 +66,7 @@
         </div>
     </div>
 
-    <div class="input-group mb-3">
+    <div class="input-group mb-5">
         <input type="file" class="form-control" id="image" name="image" accept="image/*">
         <label class="input-group-text  @error('image') is-invalid @enderror" for="image">Immagine</label>
         @error('image')
@@ -58,7 +77,7 @@
     </div>
 
 
-    <div class="mb-3 ingredienti_ ">
+    <div class="mb-5 ingredienti_ ">
         <h3>Hashtags</h3>
         @foreach($hashtags as $tag)
             <div class="mb-3 form-check">

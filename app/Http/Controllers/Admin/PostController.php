@@ -12,6 +12,7 @@ class PostController extends Controller
 {
     private $validations = [
         'title'         => 'required|string|min:2|max:100',
+        'type'          => 'required|min:1',
         'description'   => 'required|string|max:2000',
         'image'         => 'nullable|image|max:2048',
         'link'          => 'nullable|string|max:2000'
@@ -50,7 +51,8 @@ class PostController extends Controller
 
         $newpost->title         = $data['title'];
         $newpost->description   = $data['description'];
-        $newpost->link   = $data['link'];
+        $newpost->link          = $data['link'];
+        $newpost->type          = $data['type'];
         $newpost->save();
 
         $newpost->hashtags()->sync($data['tags'] ?? []);
@@ -104,7 +106,8 @@ class PostController extends Controller
         // aggiornare i dati nel db se validi
         $post->title         = $data['title'];
         $post->description   = $data['description'];
-        $post->link   = $data['link'];
+        $post->link          = $data['link'];
+        $post->type          = $data['type'];
         $post->update();
 
         // associare i hashtag
