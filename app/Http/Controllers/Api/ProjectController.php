@@ -25,7 +25,7 @@ class ProjectController extends Controller
             $query = $query->where('category_id', $categoryId);
         }
 
-        $projects = $query->paginate(60);
+        $projects = $query->paginate(500);
 
 
 
