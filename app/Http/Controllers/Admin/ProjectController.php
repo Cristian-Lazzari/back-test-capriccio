@@ -14,7 +14,7 @@ class ProjectController extends Controller
 {
     private $validations = [
         'name'          => 'required|string|min:2|max:50',
-        'price'         => 'required|string|min:1|max:6',
+        'price'         => 'required|string|min:1',
         'image'         => 'nullable|image',
     ];
 
