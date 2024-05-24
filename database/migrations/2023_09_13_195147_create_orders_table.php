@@ -14,10 +14,12 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('phone', 20);
             $table->string('email', 100);
+            $table->string('message', 1000)->nullable();
+
             $table->string('comune', 50)->default('0');
             $table->string('indirizzo', 100)->default('0');
             $table->string('civico', 30)->default('0');
-            $table->string('message', 1000)->nullable();
+            
             $table->unsignedBigInteger('total_price')->default(0);
             $table->smallInteger('total_pz_q');
             $table->smallInteger('total_pz_t');
